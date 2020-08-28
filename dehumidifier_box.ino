@@ -37,13 +37,13 @@ byte empty[] = {
   B00000,
   B00000
 }; // Unfilled Block
-int fanSpeed = 20;
+int fanSpeed = 30;
 
 void setup() {
-  Serial.begin(9600);
+  //Serial.begin(9600);
 
   myHumidity.begin();
-  lcd.begin(); // @todo Remove Later
+  //lcd.begin(); // @todo Remove Later
   lcd.backlight(); // @todo Remove Later
   lcd.createChar(0, fill); 
   lcd.createChar(1, empty); 
@@ -52,13 +52,13 @@ void setup() {
 void loop() {
   float humd = myHumidity.readHumidity();
   float temp = myHumidity.readTemperature();
-
-  Serial.print(" Temperature:");
-  Serial.print(temp, 1);
-  Serial.print("C");
-  Serial.print(" Humidity:");
-  Serial.print(humd, 1);
-  Serial.print("%");
+//
+//  Serial.print(" Temperature:");
+//  Serial.print(temp, 1);
+//  Serial.print("C");
+//  Serial.print(" Humidity:");
+//  Serial.print(humd, 1);
+//  Serial.print("%");
   
   lcd.clear();
 
@@ -74,13 +74,14 @@ void loop() {
   for(int i=0; i< 16; i++) {
     
     lcd.setCursor(i,1);
-    if(i < 5){
+    int a = 0.16 * fanSpeed;
+    if(i <= a){
       lcd.write(0);
     } else {
       lcd.write(1);
     }
   }
   
-  Serial.println();
+  //Serial.println();
   delay(3000);
 }
